@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Steganography</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        .container p {
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .features {
+            margin-top: 30px;
+        }
+
+        h2 {
+            color: #007bff;
+        }
+
+        ul {
+            color: #333;
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html'%}
+    <div class="container">
+        <h1>About Steganography</h1>
+        <p>
+            Steganography is the art and science of concealing information within other non-secret text or data.
+            It involves hiding secret information within an ordinary file or message in such a way that it does not
+            appear to be hidden. The goal is to hide the existence of the information.
+        </p>
+        <p>
+            Steganography is widely used for various purposes, and it offers several features and applications:
+        </p>
+
+        <div class="features">
+            <h2>Features of Steganography:</h2>
+            <ul>
+                <li>Concealment: Information is concealed within other data to avoid detection.</li>
+                <li>Security: Provides a covert way to transmit sensitive information securely.</li>
+                <li>Imperceptibility: Changes made are often imperceptible to the human eye or ear.</li>
+                <li>Robustness: Some steganographic techniques are robust against data loss or compression.</li>
+            </ul>
+        </div>
+
+        <div class="applications">
+            <h2>Applications of Steganography:</h2>
+            <ul>
+                <li>Secure Communication: Transmitting confidential information without raising suspicion.</li>
+                <li>Digital Watermarking: Embedding copyright information or author details in digital media.</li>
+                <li>Covert Channels: Creating covert channels for communication in restricted environments.</li>
+                <li>Authentication: Verifying the authenticity of digital content.</li>
+                <li>Forensics: Investigating and detecting hidden information in digital media.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

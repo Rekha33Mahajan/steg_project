@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .tips {
+            color: #333;
+            margin-top: 30px;
+        }
+
+        h2 {
+            color: #007bff;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html'%}
+    <div class="container">
+        <div class="tips">
+            <h2>Helpful Tips:</h2>
+            <p>
+                Welcome to the help page! Below are some tips to assist you in using our steganography tool.
+            </p>
+            <ul>
+                <li>Ensure your image is in a common format like JPEG or PNG for better compatibility.</li>
+                <li>Choose a strong passphrase when encrypting text for added security.</li>
+                <li>Pay attention to file extensions and formats when saving or extracting data.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

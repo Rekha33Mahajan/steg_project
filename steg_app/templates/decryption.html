@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Encryption</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        box-sizing: border-box;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 50px;
+      }
+
+      .sub-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+      }
+
+      .sub-btn,
+      .reset-btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-bottom: 10px;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      .sub-btn {
+        background-color: #007bff;
+        color: #fff;
+      }
+
+      .reset-btn {
+        background-color: #fff;
+        color: #007bff;
+        border: 1px solid #007bff;
+      }
+
+      .reset-btn:hover {
+        background-color: #007bff;
+        color: #fff;
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        color: #555;
+      }
+
+      input[type="file"],
+      textarea {
+        width: calc(
+          100% - 22px
+        ); /* Adjusted width to accommodate both buttons */
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        display: inline-block; /* Make inline to fit side by side */
+      }
+
+      .char-count {
+        color: #555;
+        margin-top: 5px;
+      }
+      .alert {
+        background-color: #ffffff;
+        color: #000000;
+        padding: 15px;
+        border-radius: 4px;
+        margin-top: 20px;
+        border: 1px solid #c3e6cb;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .alert h4 {
+        margin-top: 0;
+        color: #333;
+      }
+
+      .alert p {
+        margin-bottom: 0;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          margin-top: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+    <div class="container">
+      <h1>Decrypt your image</h1>
+      <form
+        method="post"
+        action="{% url 'decryption' %}"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+        <div class="form-group">
+          <label>Decrypt text from image</label>
+          <input type="file" name="image" class="form-control-file" required />
+        </div>
+
+        <div class="sub-container">
+          <button type="submit" class="sub-btn">Decrypt</button>
+          <button type="button" class="reset-btn" onclick="resetForm()">
+            Reset
+          </button>
+        </div>
+      </form>
+    </div>
+    {% if text %}
+    <div class="alert mt-5">
+      <h4>Decrypted Text</h4>
+      <p class="text">{{text}}</p>
+    </div>
+    {% endif %}
+    <script>
+      function resetForm() {
+        // Reset the file input
+        var fileInput = document.querySelector('input[type="file"]');
+        fileInput.value = '';
+
+        // Hide the decrypted text display
+        var decryptedTextContainer = document.querySelector('.alert');
+        if (decryptedTextContainer) {
+          decryptedTextContainer.style.display = 'none';
+        }
+      }
+
+    </script>
+  </body>
+</html>
