@@ -1,9 +1,12 @@
+# views.py
+
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login, authenticate, logout
+from django.shortcuts import render, redirect
 from email.mime import image
 from threading import local
-from django.shortcuts import render
 from httpx import post
 from numpy import extract
-
 import stepic
 from PIL import Image
 
@@ -47,5 +50,39 @@ def decryption_view(request):
 
 def about_view(request):
     return render(request, 'about.html')
+
 def help_view(request):
     return render(request, 'help.html')
+
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('home')  # Redirect to the home page after successful registration
+    else:
+        form = UserCreationForm()
+    return render(request, 'auth/register.html', {'form': form})
+
+def user_login(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('encryption')  # Redirect to the home page after successful login
+    else:
+        form = AuthenticationForm()
+    return render(request, 'auth/login.html', {'form': form})
+
+def user_logout(request):
+    logout(request)
+    return redirect('index')  # Redirect to the home page after logout

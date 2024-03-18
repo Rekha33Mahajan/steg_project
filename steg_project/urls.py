@@ -21,6 +21,9 @@ from steg_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
+    path('register/', views.register, name='register'),
+    path('login/', views.user_login, name='login'),
+    path('logout/', views.user_logout, name='logout'),
     path('encryption/', views.encryption_view, name='encryption'),
     path('decryption/', views.decryption_view, name='decryption'),
     path('about/', views.about_view, name='about'),
