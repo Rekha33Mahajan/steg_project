@@ -1,0 +1,102 @@
+{% extends 'navbar.html'%}
+{% block content %}
+{% load static %}
+<style>
+    body {
+        font-family: "Lato", sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    #bg-video{
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+        z-index: -1;
+        overflow: hidden;
+    }
+
+    #content-wrapper {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .jumbotron {
+        background-color: #343a40; /* Dark background color */
+        border-radius: 10px; /* Rounded corners */
+        padding: 10px; /* Padding inside the jumbotron */
+        margin-top: 20px; /* Add some space at the top */
+        text-align: center; /* Center align text */
+        padding-bottom: 22px;
+    }
+
+    .btn {
+        background-color: #4377e6; /* Yellow background color */
+        color: #212529; /* Text color */
+        padding: 10px 20px; /* Padding inside the button */
+        border: none; /* Remove button border */
+        border-radius: 5px; /* Rounded corners */
+        font-size: 18px; /* Button font size */
+        cursor: pointer; /* Add pointer cursor on hover */
+        transition: background-color 0.3s; /* Smooth transition on hover */
+    }
+
+    .btn:hover {
+        background-color: #1a439b; /* Darker yellow background color on hover */
+        color: white;
+    }
+
+    @media (max-width: 768px) {
+        .jumbotron {
+            padding: 20px; /* Reduce padding on smaller screens */
+        }
+
+        .btn {
+            font-size: 16px; /* Reduce button font size on smaller screens */
+        }
+    }
+
+    /* Style for side by side buttons */
+    .btn-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .btn-container .btn {
+        margin: 0 10px;
+    }
+</style>
+
+<div class="container" style="margin: auto; width: 100%;">
+    <video autoplay muted loop id="bg-video">
+        <source src="{% static 'home.mp4'%}" type="video/mp4">
+    </video>
+</div>
+
+<div id="content-wrapper">
+    <div class="container" style="padding-top: 100px; padding-bottom: 50px;">
+        <h1 class="display-4" style="color: rgb(242, 242, 253);"><center><b class="text-monospace">Steganography</b></center></h1>
+        <p class="lead" ><center style="color: #dedde4;">The synergy of cryptography and steganography: a symphony of secrecy, weaving intricate patterns of encryption and covert communication, where the art of concealment meets the science of protection, safeguarding secrets in a realm of hidden truths.</center></p>
+        <center><h3><a href="{% url 'explore' %}" style=" color: rgb(2, 41, 112);"> <b>Explore the world of cyber security</b></a></h3></center>
+    </div>
+</div>
+
+<div class="jumbotron jumbotron-fluid text-white">
+    <div class="container" style="padding-top: 25px; padding-bottom: 10px;">
+        <h3 class="display-5"><b class="text-monospace">Want to Encrypt or Decrypt text?</b></h3>
+        <p class="lead">Quickly jump to</p>
+        <div class="btn-container">
+            <form action="{% url 'encrypt'%}" method="GET"> 
+                <button type="submit" class="btn btn-warning">Encryptor</button>
+            </form>
+            <form action="{% url 'decrypt'%}" method="GET"> 
+                <button type="submit" class="btn btn-warning">Decryptor</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,108 @@
+{% extends 'navbar.html'%} 
+{% block content %} 
+{% load static %}
+
+<style>
+  body {
+    font-family: "Lato", sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  #bg-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    overflow: hidden;
+  }
+
+  #content-wrapper {
+    position: relative;
+    z-index: 1;
+  }
+
+  .decryption-result {
+    margin-top: 20px;
+    background-color: #121633; /* Dark blue background color */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Padding inside the section */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Drop shadow effect */
+    color: #fff; /* White text color */
+  }
+
+  .decryption-result h4 {
+    color: #00ff00; /* Green text color for headings */
+    font-size: 24px; /* Larger font size for headings */
+    margin-bottom: 10px; /* Add some space below the heading */
+  }
+
+  .decryption-result p {
+    color: #b0bec5; /* Light gray text color for paragraphs */
+    margin-bottom: 10px; /* Add some space between paragraphs */
+  }
+
+  /* Responsive styling */
+  @media (max-width: 768px) {
+    .container {
+      width: 90%; /* Adjust container width for smaller screens */
+    }
+
+    .decryption-result {
+      padding: 15px; /* Decrease padding for smaller screens */
+    }
+  }
+</style>
+
+<div class="container" style="margin: auto; width: 100%">
+  <img src="{% static 'img1.jpeg'%}" id="bg-video" style="height: 100%; width: 80%">
+</div>
+
+<div id="content-wrapper">
+  <div class="container" style="padding-top: 100px; padding-bottom: 50px">
+    <h1 class="display-4" style="color: rgb(242, 242, 253)">
+      <center><b>Welcome To the Decryptor</b></center>
+    </h1>
+    <p class="lead">
+      <center style="color: #dedde4">
+        <i class="fas fa-eye-slash"></i> Feel free to decrypt any text you like. Trust us; it will be kept confidential.
+      </center>
+      </center>
+    </p>
+    <center>
+      <h3>
+        <a href="#" style="color: rgb(2, 41, 112)">
+          <b>Explore the world of cyber security</b></a>
+      </h3>
+    </center>
+  </div>
+</div>
+
+<div class="container" style="width: 700px; margin: auto; text-align: center">
+  <h1 style="color: white">DECRYPTION RESULT</h1>
+  <div class="decryption-result">
+    {% if text %}
+    <div class="alert mt-5">
+      <h4>Decrypted Text</h4>
+      <p class="text">{{text}}</p>
+    </div>
+    {% else %}
+    <p>No hidden text found in the image.</p>
+    {% endif %}
+    <hr>
+
+    <!-- {% if image_url %}
+    <h5 class="my-2">Derypted Image:</h5>
+    <div class="col">
+      <a class="btn btn-dark btn-sm row" href="{{ image_url }}" download>Download</a>
+    </div>
+    <br />
+    {% else %}
+    <p>No</p>
+    <br />
+    {% endif %}
+  </div> -->
+</div>
+{% endblock %}

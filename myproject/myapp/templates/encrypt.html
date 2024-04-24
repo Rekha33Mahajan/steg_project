@@ -1,0 +1,244 @@
+{% extends 'navbar.html'%} {% block content %} {% load static %}
+<style>
+  body {
+    font-family: "Lato", sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  #bg-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    overflow: hidden;
+  }
+  #content-wrapper {
+    position: relative;
+    z-index: 1;
+  }
+
+  .jumbotron {
+    background-color: #343a40; /* Dark background color */
+    border-radius: 10px; /* Rounded corners */
+    padding: 10px; /* Padding inside the jumbotron */
+    margin-top: 20px; /* Add some space at the top */
+    text-align: center; /* Center align text */
+    width: 700px;
+    margin: auto;
+  }
+  .btn {
+    background-color: #4377e6; /* Yellow background color */
+    color: #212529; /* Text color */
+    padding: 10px 20px; /* Padding inside the button */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 18px; /* Button font size */
+    cursor: pointer; /* Add pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition on hover */
+  }
+
+  .btn:hover {
+    background-color: #1a439b; /* Darker yellow background color on hover */
+    color: white;
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .encryption-results {
+    margin-top: 20px;
+    background-color: #121633; /* Dark blue background color */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Padding inside the section */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Drop shadow effect */
+    font-family: 'Courier New', Courier, monospace; /* Monospaced font */
+    color: #00ff00; /* Green text color */
+  }
+
+  .encryption-results h2 {
+    color: #00ff00; /* Green text color for headings */
+    font-size: 24px; /* Larger font size for headings */
+    margin-bottom: 10px; /* Add some space below the heading */
+  }
+
+  .encryption-results p {
+    margin-bottom: 5px; /* Add some space between paragraphs */
+  }
+
+  .encryption-results img {
+    max-width: 100%; /* Ensure the image doesn't exceed its container's width */
+    height: auto; /* Maintain aspect ratio */
+    margin-top: 10px; /* Add some space above the image */
+  }
+
+  /* Error message style */
+  .error {
+    color: #ff0000; /* Red text color for error messages */
+    font-weight: bold; /* Bold font for emphasis */
+  }
+
+  /* ASCII art */
+  .ascii-art {
+    font-family: 'Courier New', Courier, monospace;
+    color: #00ff00;
+    white-space: pre-wrap;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  /* CSS animation keyframes */
+  @keyframes fadeInZoom {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+</style>
+<!-- <div class="container" style="margin: auto; width: 100%">
+  <img
+    src="{% static 'img1.jpeg'%}"
+    id="bg-video"
+    style="height: 100%; width: 80%"
+  />
+</div> -->
+<div class="container" style="margin: auto; width: 100%;">
+  <video autoplay muted loop id="bg-video">
+      <source src="{% static 'home.mp4'%}" type="video/mp4">
+  </video>
+</div>
+
+<div id="content-wrapper">
+  <div class="container" style="padding-top: 100px; padding-bottom: 50px">
+    <h1 class="display-4" style="color: rgb(242, 242, 253)">
+      <center><b>Welcome To the Encrypter</b></center>
+    </h1>
+    <p class="lead">
+      <center style="color: #dedde4">
+        <i class="fas fa-eye-slash"></i> Feel free to encrypt any text you like. Trust us; it will be kept confidential.
+      </center>
+    </p>
+    <center>
+      <h3>
+        <a href="{% url 'explore' %}" style="color: rgb(2, 41, 112)">
+          <b>Explore the world of cyber security</b></a
+        >
+      </h3>
+    </center>
+  </div>
+</div>
+
+<div class="container" style="width: 700px; margin: auto; text-align: center">
+  <h1 style="color: white">ENCRYPTION</h1>
+  <form
+    method="post"
+    action="{% url 'encrypt' %}"
+    enctype="multipart/form-data"
+    onsubmit="showModal()"
+  >
+    {% csrf_token %}
+    <div class="form-group">
+      <input
+        type="file"
+        name="image"
+        class="form-control-file"
+        id="form-file"
+        required
+        style="color: white; border: 1px solid white; margin-top: 50px"
+      />
+    </div>
+    <div class="form-group">
+      <img
+        id="uploaded-image"
+        src="#"
+        alt="Uploaded Image"
+        style="max-width: 100%; display: none"
+      />
+    </div>
+    <div class="form-group">
+      <textarea
+        name="text"
+        id="text-input"
+        class="form-control"
+        rows="3"
+        oninput="updateCharCount(this)"
+        required
+        placeholder="Enter your text here"
+      ></textarea>
+      <span class="char-count" style="color: white">Characters: 0</span>
+    </div>
+    <div class="sub-container">
+      <button type="submit" class="btn">Encrypt</button>
+      <button type="button" class="btn" onclick="resetForm()">Reset</button>
+    </div>
+  </form>
+</div>
+
+{% if message %}
+    <div class="alert">
+      <p>{{message}}</p>
+    </div>
+{% endif %}
+
+<script>
+  function updateCharCount(textarea) {
+    var charCount = textarea.value.length;
+    document.querySelector(".char-count").innerText =
+      "Characters: " + charCount;
+  }
+
+  function resetForm() {
+    document.getElementById("text-input").value = "";
+    document.querySelector(".char-count").innerText = "Characters: 0";
+    document.getElementById("form-file").value = "";
+    document.getElementById("uploaded-image").style.display = "none";
+  }
+
+  document
+    .getElementById("form-file")
+    .addEventListener("change", function (event) {
+      var uploadedImage = document.getElementById("uploaded-image");
+      uploadedImage.src = URL.createObjectURL(event.target.files[0]);
+      uploadedImage.style.display = "block"; 
+    });
+    
+</script>
+{% endblock %}

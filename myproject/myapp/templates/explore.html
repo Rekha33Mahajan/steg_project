@@ -1,0 +1,117 @@
+{% extends 'navbar.html'%}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steganography Information</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            background-color: #222; /* Dark background */
+            color: #ffd700; /* Vibrant yellow text */
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        h1 {
+            color: #00ffff; /* Electric blue heading */
+        }
+        h2 {
+            color: #00ffff; /* Deep sky blue heading */
+        }
+        p {
+            color: #fcfbfb; /* Vibrant yellow text */
+        }
+        ul {
+            color: #dbd9d9; /* Vibrant yellow text for unordered lists */
+        }
+        #bg-video{
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        #content-wrapper {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container" style="margin: auto; width: 100%">
+    <img
+        src="{% static 'img1.jpeg'%}"
+        id="bg-video"
+        style="height: 100%; width: 80%"
+    />
+</div>
+
+<div id="content-wrapper">
+    <h1>Steganography</h1>
+    <p>
+        Steganography is the practice of concealing a file, message, image, or
+        video within another file, message, image, or video. The word
+        steganography comes from Greek, meaning "covered writing". The goal of
+        steganography is to hide the existence of the information being
+        communicated.
+    </p>
+
+    <h2>Steganography vs Cryptography</h2>
+    <p>
+        While both steganography and cryptography are techniques used for secure
+        communication, they differ in their approach:
+    </p>
+    <ul>
+        <li>
+            <strong>Steganography:</strong> In steganography, the focus is on
+            hiding the existence of the message itself. It conceals the message
+            within another file or medium, making it appear as innocent data. The
+            goal is to prevent detection of the message.
+        </li>
+        <li>
+            <strong>Cryptography:</strong> Cryptography, on the other hand,
+            focuses on encrypting the message to make it unreadable to anyone
+            without the proper decryption key. The goal is to prevent unauthorized
+            access to the content of the message.
+        </li>
+    </ul>
+
+    <h2>Importance of Steganography in Cybersecurity</h2>
+    <p>
+        Steganography plays a crucial role in cybersecurity for several reasons:
+    </p>
+    <ul>
+        <li>
+            <strong>Covert Communication:</strong> Steganography enables covert
+            communication, allowing users to transmit sensitive information
+            without arousing suspicion.
+        </li>
+        <li>
+            <strong>Security Through Obscurity:</strong> By hiding messages within
+            seemingly innocuous data, steganography provides an additional layer
+            of security, making it difficult for attackers to identify and
+            intercept sensitive information.
+        </li>
+        <li>
+            <strong>Counterintelligence:</strong> Steganography can be used for
+            counterintelligence purposes, such as embedding tracking or
+            watermarking information to identify unauthorized distribution or
+            access.
+        </li>
+        <li>
+            <strong>Resilience Against Attacks:</strong> In some cases,
+            steganography can offer resilience against cryptographic attacks by
+            providing an additional layer of obfuscation.
+        </li>
+    </ul>
+</div>
+</body>
+</html>
+{% endblock %}
